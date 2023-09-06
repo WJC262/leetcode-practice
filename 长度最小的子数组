@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int min = INT32_MAX;
+
+        for(int i = 0; i < size(nums); i++){
+            int result = nums[i];
+            int j = i + 1;
+            if(result >= target){
+                min = 1;
+                break;
+            }
+            while(j < size(nums)){
+                if(j - i + 1 >= min){
+                    break;
+                }
+                result = result + nums[j];
+                if(result >= target){
+                    if(j - i + 1 < min){
+                        min = j - i + 1;
+                        break;
+                    }
+                }
+                j += 1;
+            } 
+        }
+        if(min == INT32_MAX){
+            return 0;
+        }else{
+            return min;
+        }
+    }
+};
