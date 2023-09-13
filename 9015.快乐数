@@ -1,0 +1,27 @@
+class Solution {
+public:
+
+    int getsum(int n){
+        int sum = 0;
+        while(n){
+            sum += (n % 10) * (n % 10);
+            n /= 10;
+        }
+        return sum;
+    }
+
+    bool isHappy(int n) {
+        unordered_set<int> set;
+        while(1){
+            if(getsum(n) == 1){
+                return true;
+            }
+            if(set.find(getsum(n)) != set.end()){
+                return false;
+            }else{
+                set.insert(getsum(n));
+            }
+            n = getsum(n);
+        }
+    }
+};
