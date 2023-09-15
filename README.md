@@ -1,2 +1,2 @@
 # leetcode-practice
-记录所有做过的力扣题目
+记录做过的力扣题目
