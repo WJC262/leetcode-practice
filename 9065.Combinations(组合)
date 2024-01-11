@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<vector<int>> result;
+    vector<int> path;
+    void T(int n, int k, int start){
+        if(path.size() == k){
+            result.push_back(path);
+            return;
+        }
+        for(int i = start; i <= n; i++){
+            path.push_back(i);
+            T(n, k, i + 1);
+            path.pop_back();
+        }
+    }
+
+    vector<vector<int>> combine(int n, int k) {
+        T(n, k, 1);
+        return result;
+    }
+};
