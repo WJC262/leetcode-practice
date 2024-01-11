@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<vector<int>> result;
+    vector<int> path;
+
+    void T(int targetSum, int k, int sum, int startNum){
+        if(path.size() == k){
+            if(sum == targetSum){
+                result.push_back(path);
+                return;
+            }
+        }
+        for(int i = startNum; i <= 9; i++){
+            sum += i;
+            path.push_back(i);
+            T(targetSum, k, sum, i + 1);
+            path.pop_back();
+            sum -= i;
+        }
+    }
+
+    vector<vector<int>> combinationSum3(int k, int n) {
+        T(n, k, 0, 1);
+        return result;
+    }
+};
