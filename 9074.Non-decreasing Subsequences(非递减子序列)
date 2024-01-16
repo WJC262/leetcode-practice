@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<vector<int>> result;
+    vector<int> path;
+    void T(vector<int>& nums, int start){
+        if(path.size() > 1){
+            result.push_back(path);
+            //return;
+        }
+        unordered_set<int> uset;
+        for(int i = start; i < nums.size(); i++){
+            if((!path.empty() && path.back() > nums[i]) || uset.find(nums[i]) != uset.end()){
+                continue;
+            }
+            uset.insert(nums[i]);
+            path.push_back(nums[i]);
+            T(nums, i + 1);
+            path.pop_back();
+
+        }
+    }
+
+    vector<vector<int>> findSubsequences(vector<int>& nums) {
+        T(nums, 0);
+        return result;
+    }
+};
