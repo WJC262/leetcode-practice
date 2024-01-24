@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int candy(vector<int>& ratings) {
+        vector<int> candyvec(ratings.size(), 1);
+        int result = 0;
+        for(int i = 0; i < candyvec.size() - 1; i++){
+            if(ratings[i + 1] > ratings[i]) candyvec[i + 1] = candyvec[i] + 1;
+        }
+
+        for(int i = candyvec.size() - 2; i >= 0; i--){
+            if(ratings[i] > ratings[i + 1]) candyvec[i] = max(candyvec[i], candyvec[i + 1] + 1);
+        }
+        
+        for(int i = 0; i < candyvec.size(); i++){
+            result += candyvec[i];
+        }
+        return result;
+    }
+};
