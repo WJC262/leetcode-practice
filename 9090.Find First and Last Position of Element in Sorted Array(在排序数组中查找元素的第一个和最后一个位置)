@@ -1,0 +1,41 @@
+class Solution {
+public:
+        int searchright(vector<int>& nums, int left, int right, int target){
+            int R = -2;
+            while(left <= right){
+                int mid = left + (right - left) / 2;
+                if(nums[mid] > target){
+                    right = mid - 1;
+                }else{
+                    left = mid + 1;
+                    R = left;
+                }
+            }
+            return R;
+        }
+
+        int searchleft(vector<int>& nums, int left, int right, int target){
+            int L = -2;
+            while(left <= right){
+                int mid = left + (right - left) / 2;
+                if(nums[mid] >= target){
+                    right = mid - 1;
+                    L = right;
+                }else{
+                    left = mid + 1;
+                }
+            }
+            return L;
+        }
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int right = searchright(nums, 0, nums.size() - 1, target);
+        int left = searchleft(nums, 0, nums.size() - 1, target);
+        if(right == -2 || left == -2){
+            return {-1, -1};
+        }
+        if(right - left > 1) return {left + 1, right - 1};
+        return {-1, -1};
+
+
+    }
+};
